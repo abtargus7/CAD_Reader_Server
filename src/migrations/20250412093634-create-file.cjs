@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       size: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       path: {
         type: Sequelize.STRING

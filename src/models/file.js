@@ -1,26 +1,34 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class file extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/dbConnection.js";
+
+export default sequelize.define(
+  'file',
+  {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    fileName: {
+      type: DataTypes.STRING
+    },
+    fileType: {
+      type: DataTypes.STRING
+    },
+    size: {
+      type: DataTypes.INTEGER
+    },
+    path: {
+      type: DataTypes.STRING
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
     }
-  }
-  file.init({
-    fileName: DataTypes.STRING,
-    fileType: DataTypes.STRING,
-    size: DataTypes.NUMBER,
-    path: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'file',
-  });
-  return file;
-};
+  })
