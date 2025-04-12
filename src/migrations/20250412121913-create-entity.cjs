@@ -4,31 +4,31 @@ const { v4: uuidv4 } = require('uuid');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('block', {
+    await queryInterface.createTable('entity', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      fileId: {
+      blockId: {
         type: Sequelize.UUID,
         references: {
-          model: "file",
+          model: "block",
           key: "id"
         },
       },
       name: {
         type: Sequelize.STRING
       },
-      base_x: {
-        type: Sequelize.FLOAT
+      blockId: {
+        type: Sequelize.INTEGER
       },
-      base_y: {
-        type: Sequelize.FLOAT
+      type: {
+        type: Sequelize.STRING
       },
-      base_z: {
-        type: Sequelize.FLOAT
+      data: {
+        type: Sequelize.JSONB
       },
       layer: {
         type: Sequelize.STRING
@@ -44,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('block');
+    await queryInterface.dropTable('entity');
   }
 };

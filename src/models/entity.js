@@ -1,10 +1,10 @@
 'use strict';
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/dbConnection.js";
-import block from "./block.js";
+const { v4: uuidv4 } = require('uuid');
 
-const file =  sequelize.define(
-  'file',
+const entity =  sequelize.define(
+  'entity',
   {
     id: {
       allowNull: false,
@@ -12,16 +12,23 @@ const file =  sequelize.define(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    fileName: {
+    name: {
       type: DataTypes.STRING
     },
-    fileType: {
+    blockId: {
+      type: DataTypes.UUID,
+      references: {
+        model: "block",
+        key: "id"
+      },
+    },
+    type: {
       type: DataTypes.STRING
     },
-    size: {
-      type: DataTypes.INTEGER
+    data: {
+      type: DataTypes.JSONB
     },
-    path: {
+    layer: {
       type: DataTypes.STRING
     },
     createdAt: {
@@ -35,10 +42,7 @@ const file =  sequelize.define(
   },
   {
     freezeTableName: true,
-    modelName: 'file'
+    modelName: 'entity'
   })
 
-file.hasMany(block, {foreignKey: 'fileId'})
-block.belongsTo(file, {foreignKey: "fileId"})
-
-export default file
+export default entity

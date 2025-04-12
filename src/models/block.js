@@ -1,15 +1,16 @@
 'use strict';
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/dbConnection.js";
+import entity from "./entity.js";
 
-export default sequelize.define(
-  'file',
+const block = sequelize.define(
+  'block',
   {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING
@@ -26,8 +27,8 @@ export default sequelize.define(
     layer: {
       type: DataTypes.STRING
     },
-    file: {
-      type: DataTypes.INTEGER,
+    fileId: {
+      type: DataTypes.UUID,
       references: {
         model: "file",
         key: "id"
@@ -35,10 +36,20 @@ export default sequelize.define(
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
+  },
+  {
+    freezeTableName: true,
+    modelName: 'block'
   })
+
+block.hasMany(entity,{foreignKey: "blockId"})
+entity.belongsTo(block, {foreignKey: "blockId"})
+
+
+export default block
