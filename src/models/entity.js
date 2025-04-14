@@ -1,7 +1,6 @@
 'use strict';
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/dbConnection.js";
-const { v4: uuidv4 } = require('uuid');
 
 const entity =  sequelize.define(
   'entity',
@@ -11,9 +10,6 @@ const entity =  sequelize.define(
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
-    },
-    name: {
-      type: DataTypes.STRING
     },
     blockId: {
       type: DataTypes.UUID,
@@ -25,11 +21,29 @@ const entity =  sequelize.define(
     type: {
       type: DataTypes.STRING
     },
-    data: {
+    coOrdinates: {
       type: DataTypes.JSONB
     },
-    layer: {
+    handle: {
       type: DataTypes.STRING
+    },
+    ownerHandle: {
+      type: DataTypes.STRING
+    },
+    color: {
+      type: DataTypes.INTEGER
+    },
+    colorIndex: {
+      type: DataTypes.INTEGER
+    },
+    shape: {
+      type: DataTypes.BOOLEAN
+    },
+    normalVector: {
+      type: DataTypes.JSONB
+    },
+    degreeOfSplineCurve: {
+      type: DataTypes.INTEGER
     },
     createdAt: {
       allowNull: false,

@@ -18,20 +18,32 @@ module.exports = {
           key: "id"
         },
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      blockId: {
-        type: Sequelize.INTEGER
-      },
       type: {
         type: Sequelize.STRING
       },
-      data: {
+      coOrdinates: {
         type: Sequelize.JSONB
       },
-      layer: {
+      handle: {
         type: Sequelize.STRING
+      },
+      ownerHandle: {
+        type: Sequelize.STRING
+      },
+      color: {
+        type: Sequelize.INTEGER
+      },
+      colorIndex: {
+        type: Sequelize.INTEGER
+      },
+      shape: {
+        type: Sequelize.BOOLEAN
+      },
+      normalVector: {
+        type: Sequelize.JSONB
+      },
+      degreeOfSplineCurve: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -15,16 +15,25 @@ const block = sequelize.define(
     name: {
       type: DataTypes.STRING
     },
-    base_x: {
+    positionX: {
       type: DataTypes.FLOAT
     },
-    base_y: {
+    positionY: {
       type: DataTypes.FLOAT
     },
-    base_z: {
+    positionZ: {
       type: DataTypes.FLOAT
     },
-    layer: {
+    handle: {
+      type: DataTypes.STRING
+    },
+    ownerHandle: {
+      type: DataTypes.STRING
+    },
+    name2: {
+      type: DataTypes.STRING
+    },
+    xrefPath: {
       type: DataTypes.STRING
     },
     fileId: {

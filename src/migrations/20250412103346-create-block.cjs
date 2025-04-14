@@ -21,16 +21,25 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      base_x: {
+      positionX: {
         type: Sequelize.FLOAT
       },
-      base_y: {
+      positionY: {
         type: Sequelize.FLOAT
       },
-      base_z: {
+      positionZ: {
         type: Sequelize.FLOAT
       },
-      layer: {
+      handle: {
+        type: Sequelize.STRING
+      },
+      ownerHandle: {
+        type: Sequelize.STRING
+      },
+      name2: {
+        type: Sequelize.STRING
+      },
+      xrefPath: {
         type: Sequelize.STRING
       },
       createdAt: {

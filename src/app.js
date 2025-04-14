@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import fileRouter from './routes/file.routes.js'
 
 const app = express()
 
@@ -12,6 +13,8 @@ app.use(express.static("public"))
 
 
 //routes
+app.use('/api/v1/file', fileRouter)
+
 
 //create tables
 
