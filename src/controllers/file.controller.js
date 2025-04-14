@@ -1,7 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiError } from '../utils/ApiError.js'
 import fs from 'fs'
-import path, { parse } from "path"
 import DxfParser from "dxf-parser"
 import File from '../models/file.js'
 import Block from "../models/block.js"
