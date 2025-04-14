@@ -16,7 +16,5 @@ app.use(express.static("public"))
 app.use('/api/v1/file', fileRouter)
 
 
-//create tables
-
 
 export {app}
