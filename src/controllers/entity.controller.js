@@ -4,28 +4,41 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 import Entity from "../models/entity.js"
 
 //controller to retrieve all entities from a block
-const retrieveEntitiesByBlockId = asyncHandler(async(req, res) => {
+const retrieveEntitiesByBlockId = asyncHandler(async (req, res) => {
     const blockId = req.params.id
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
 
     const entities = await Entity.findAll({
-        where: {
-            blockId,
-        }
+        where: {blockId},
+        limit,
+        offset,
+        order: [["createdAt", "DESC"]],
     })
 
-    if(!entities) throw new ApiError(404, "Entities not found for this block")
+    if (!entities) throw new ApiError(404, "Entities not found for this block")
 
-    return res.status(200).json(new ApiResponse(200, entities, "Retrieved all entities from a block"))
+    const total = await Entity.count({ where: { blockId } });
+
+    const returnData = {
+        entities,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit)
+    }
+
+    return res.status(200).json(new ApiResponse(200, returnData, "Retrieved all entities from a block"))
 })
 
-const retrieveEntityById = asyncHandler(async(req, res) => {
+const retrieveEntityById = asyncHandler(async (req, res) => {
     const entityId = req.params.id
 
     const entity = await Entity.findByPk(entityId)
 
-    if(!entity) throw new ApiError(404, "Entity not found")
+    if (!entity) throw new ApiError(404, "Entity not found")
 
     return res.status(200).json(new ApiResponse(200, entity, "Retrieved entity successfully"))
 })
 
-export {retrieveEntitiesByBlockId, retrieveEntityById}
+export { retrieveEntitiesByBlockId, retrieveEntityById }

@@ -101,7 +101,7 @@ const uploadCAD = asyncHandler(async (req, res) => {
 
                     case 'LWPOLYLINE':
                         coords = {
-                            vertices: JSON.stringify(entity.vertices || []),
+                            vertices: entity.vertices || [],
                             isClosed: entity.shape || false,
                         };
                         break;
@@ -109,15 +109,15 @@ const uploadCAD = asyncHandler(async (req, res) => {
                     case 'SPLINE':
                         coords = {
                             degree: entity.degree,
-                            controlPoints: JSON.stringify(entity.controlPoints || []),
-                            knotValues: JSON.stringify(entity.knots || []),
+                            controlPoints: entity.controlPoints || [],
+                            knotValues: entity.knots || [],
                             isPlanar: entity.planar,
                         };
                         break;
 
                     default:
                         coords = {
-                            rawData: JSON.stringify(entity),
+                            rawData: entity,
                         };
                 }
 
@@ -149,7 +149,7 @@ const uploadCAD = asyncHandler(async (req, res) => {
         console.log('File, blocks, and entities saved successfully.');
 
         // send response
-        return res.status(201).json(new ApiResponse(201, "File parsed and data inserted successfully"))
+        return res.status(201).json(new ApiResponse(201, createFile.dataValues, "File parsed and data inserted successfully"))
 
     } catch (error) {
         transaction.rollback();
